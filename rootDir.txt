@@ -1,0 +1,27 @@
+server: {
+    npm init -y
+    npm install --save-dev nodemon
+    npm i dotenv
+    npm install express
+    npm install mongoose
+    npm install cors
+    npm install bcryptjs
+    npm install jsonwebtoken
+    npm install express-validator
+    npm install uuid
+    npm install bcrypt
+    npm install @upstash/ratelimit @upstash/redis
+}
+
+client: {
+    npm create vite@latest
+    npm install react-router
+    npm i axios
+    npm install -D tailwindcss postcss autoprefixer
+    npm install -D tailwindcss@3
+    npx tailwindcss init
+    npm install react-router-dom@latest
+    npm i lucide-react
+    npm install react-hook-form framer-motion axios react-router-dom
+    npm i dotenv
+}

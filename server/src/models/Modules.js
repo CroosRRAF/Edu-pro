@@ -1,0 +1,24 @@
+import mongoose from "mongoose";
+
+const moduleSchema = new mongoose.Schema(
+  {
+    moduleID: {
+      type: String,
+      required: true,
+      unique: true,
+      match: /^[A-Z]{3}\d{3}$/, // Example: MOD101
+    },
+    moduleName: { type: String, required: true },
+    description: { type: String, required: true },
+    credits: { type: Number, required: true, min: 0 },
+    instructor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Instructor", // New Instructor model suggested
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
+
+const Modules = mongoose.model("Modules", moduleSchema);
+export default Modules;

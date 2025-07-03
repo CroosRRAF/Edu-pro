@@ -1,0 +1,16 @@
+# Node
+node_modules/
+
+# Env
+.env
+
+# Logs
+logs/
+*.log
+
+# React build
+client/build/
+
+# IDE
+.vscode/
+.DS_Store
