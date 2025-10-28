@@ -5,6 +5,7 @@ A comprehensive web application for managing school operations including student
 ## 🚀 Features
 
 ### For Students
+
 - **Dashboard**: View personal information, courses, and activities
 - **Course Management**: Enroll in courses and track progress
 - **Sports**: Join sports teams and view schedules
@@ -13,6 +14,7 @@ A comprehensive web application for managing school operations including student
 - **Results**: Check academic performance and grades
 
 ### For Administrators
+
 - **Comprehensive Dashboard**: Overview of all school operations
 - **Student Management**: Add, edit, and manage student records
 - **Course Management**: Create and manage courses
@@ -25,6 +27,7 @@ A comprehensive web application for managing school operations including student
 ## 🛠️ Tech Stack
 
 ### Backend
+
 - **Node.js** - Runtime environment
 - **Express.js** - Web framework
 - **MongoDB** - Database
@@ -36,6 +39,7 @@ A comprehensive web application for managing school operations including student
 - **Rate Limiting** - API protection
 
 ### Frontend
+
 - **React.js** - UI library
 - **React Router** - Client-side routing
 - **Tailwind CSS** - Styling framework
@@ -53,12 +57,14 @@ A comprehensive web application for managing school operations including student
 ## 🚀 Quick Start
 
 ### 1. Clone the Repository
+
 ```bash
 git clone <repository-url>
 cd school-management-system
 ```
 
 ### 2. Install Dependencies
+
 ```bash
 # Install backend dependencies
 cd server
@@ -72,6 +78,7 @@ npm install
 ### 3. Environment Setup
 
 Create a `.env` file in the `server` directory:
+
 ```env
 PORT=5000
 MONGO_URL=mongodb://localhost:27017/OnlineSchool
@@ -84,12 +91,22 @@ UPSTASH_REDIS_REST_TOKEN=your-redis-token
 ```
 
 ### 4. Database Setup
+
+Make sure MongoDB is running on your system, then seed the database:
+
 ```bash
 cd server
 npm run seed
 ```
 
+This will create:
+
+- Admin accounts with different permission levels
+- Sample students, courses, sports, books, etc.
+- Test data for all modules including attendance and results
+
 ### 5. Start the Application
+
 ```bash
 # Start backend server
 cd server
@@ -105,10 +122,12 @@ npm run dev
 After seeding the database, you can use these credentials:
 
 ### Admin Accounts
+
 - **Super Admin**: `admin@school.com` / `admin123`
 - **Moderator**: `moderator@school.com` / `moderator123`
 
 ### Student Account
+
 - **Student**: `john.brown@example.com` / `password123`
 
 ## 📁 Project Structure
@@ -136,14 +155,50 @@ school-management-system/
 ## 🔧 Available Scripts
 
 ### Backend
-- `npm run dev` - Start development server
+
+- `npm run dev` - Start development server with nodemon
 - `npm start` - Start production server
 - `npm run seed` - Seed database with sample data
 
 ### Frontend
-- `npm run dev` - Start development server
+
+- `npm run dev` - Start development server with Vite
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
+
+## 🔐 Admin Setup & Permissions
+
+### Admin Roles
+
+- **super_admin**: Full access to all features
+- **admin**: Standard admin access
+- **moderator**: Limited access based on permissions
+
+### Permission System
+
+Each admin has granular permissions for:
+
+- `students`: view, create, edit, delete
+- `courses`: view, create, edit, delete
+- `sports`: view, create, edit, delete
+- `library`: view, create, edit, delete
+- `attendance`: view, create, edit, delete
+- `results`: view, create, edit, delete
+- `coaches`: view, create, edit, delete
+
+### JWT Token Configuration
+
+- Tokens are valid for 24 hours (configurable)
+- Include admin ID, role, and permissions
+- Required for all protected admin routes
+
+### Rate Limiting
+
+The application includes configurable rate limiting:
+
+- Default: 10 requests per 20 seconds per IP
+- Uses Upstash Redis (optional, falls back gracefully)
+- Can be disabled in development with `DISABLE_RATE_LIMITING=true`
 
 ## 🔒 Security Features
 
@@ -158,14 +213,35 @@ school-management-system/
 ## 📊 API Documentation
 
 The API includes endpoints for:
-- Authentication (login/register)
-- Student management
-- Course management
-- Sports management
-- Library management
-- Attendance tracking
-- Results management
-- Coach management
+
+### Authentication
+
+- `POST /api/admin/login` - Admin login
+- `POST /api/auth/login` - Student login
+- `POST /api/auth/register` - Student registration
+
+### Admin Management Endpoints
+
+- `GET /api/admin/dashboard` - Dashboard overview
+- `GET /api/admin/students` - Get all students
+- `POST /api/admin/students` - Create new student
+- `PUT /api/admin/students/:id` - Update student
+- `DELETE /api/admin/students/:id` - Delete student
+- `GET /api/admin/courses` - Get all courses
+- `POST /api/admin/courses` - Create new course
+- `GET /api/admin/sports` - Get all sports
+- `GET /api/admin/books` - Get all books
+- `GET /api/admin/attendance` - Get attendance records
+- `GET /api/admin/results` - Get academic results
+- `GET /api/admin/coaches` - Get all coaches
+
+### Student Endpoints
+
+- `GET /api/students/profile` - Get student profile
+- `PUT /api/students/profile` - Update student profile
+- `POST /api/students/courses/enroll` - Enroll in course
+- `POST /api/students/sports/join` - Join sport
+- `GET /api/students/:id/dashboard` - Get student dashboard data
 
 For detailed API documentation, see the individual route files or use tools like Postman.
 
@@ -184,9 +260,19 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🆘 Support
 
 If you encounter any issues or have questions:
+
 1. Check the [Issues](../../issues) page
 2. Create a new issue with detailed information
 3. Contact the development team
+
+## 📝 Changelog
+
+### Recent Updates
+
+- **Documentation Cleanup**: Consolidated setup and admin documentation into main README
+- **Fixed React Rendering Issues**: Resolved object rendering errors in admin dashboard
+- **Database Schema Updates**: Updated models to match frontend expectations
+- **Security Enhancements**: Added rate limiting, CORS protection, and security headers
 
 ---
 
