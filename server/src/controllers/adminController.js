@@ -1,3 +1,4 @@
+import { body, validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 import Admin from "../models/Admin.js";
 import Attendance from "../models/Attendance.js";
@@ -686,3 +687,263 @@ export const deleteCoach = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+// =====================
+// School Profile Management
+// =====================
+
+// Create School Profile (with ID generation)
+export const createSchoolProfile = [
+  body("schoolName").notEmpty().withMessage("School name is required"),
+  body("schoolType")
+    .isIn(["boys", "girls", "mixed"])
+    .withMessage("School type must be boys, girls, or mixed"),
+  body("address").notEmpty().withMessage("Address is required"),
+  body("contactNumber")
+    .matches(/^\+?\d{10,15}$/)
+    .withMessage("Valid contact number is required"),
+  body("email").isEmail().withMessage("Valid email is required"),
+
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+      const {
+        schoolName,
+        schoolType,
+        address,
+        contactNumber,
+        email,
+        establishedYear,
+      } = req.body;
+
+      // Generate school ID: sch_XXXY (XXX=auto-increment, Y=b/g/m)
+      const lastAdmin = await Admin.findOne().sort({ createdAt: -1 });
+      let schoolCounter = 1;
+      if (lastAdmin && lastAdmin.schoolID) {
+        const lastCounter = parseInt(lastAdmin.schoolID.substring(4, 7));
+        schoolCounter = lastCounter + 1;
+      }
+
+      const typeCode =
+        schoolType === "boys" ? "b" : schoolType === "girls" ? "g" : "m";
+      const schoolID = `sch_${String(schoolCounter).padStart(
+        3,
+        "0"
+      )}${typeCode}`;
+
+      // Update admin with school profile
+      const admin = await Admin.findById(req.user.id);
+      if (!admin) {
+        return res.status(404).json({ message: "Admin not found" });
+      }
+
+      admin.schoolName = schoolName;
+      admin.schoolID = schoolID;
+      admin.schoolType = schoolType;
+      admin.address = address;
+      admin.contactNumber = contactNumber;
+      admin.schoolEmail = email;
+      admin.establishedYear = establishedYear;
+      await admin.save();
+
+      res.status(201).json({
+        success: true,
+        message: "School profile created successfully",
+        data: {
+          schoolID,
+          schoolName,
+          schoolType,
+          address,
+          contactNumber,
+          email,
+          establishedYear,
+        },
+      });
+    } catch (error) {
+      console.error("Create school profile error:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  },
+];
+
+// Update School Profile
+export const updateSchoolProfile = async (req, res) => {
+  try {
+    const {
+      schoolName,
+      schoolType,
+      address,
+      contactNumber,
+      email,
+      establishedYear,
+    } = req.body;
+
+    const admin = await Admin.findById(req.user.id);
+    if (!admin) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    if (schoolName) admin.schoolName = schoolName;
+    if (schoolType) admin.schoolType = schoolType;
+    if (address) admin.address = address;
+    if (contactNumber) admin.contactNumber = contactNumber;
+    if (email) admin.schoolEmail = email;
+    if (establishedYear) admin.establishedYear = establishedYear;
+
+    await admin.save();
+
+    res.json({
+      success: true,
+      message: "School profile updated successfully",
+      data: {
+        schoolID: admin.schoolID,
+        schoolName: admin.schoolName,
+        schoolType: admin.schoolType,
+        address: admin.address,
+        contactNumber: admin.contactNumber,
+        email: admin.schoolEmail,
+        establishedYear: admin.establishedYear,
+      },
+    });
+  } catch (error) {
+    console.error("Update school profile error:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+// Get School Profile
+export const getSchoolProfile = async (req, res) => {
+  try {
+    const admin = await Admin.findById(req.user.id).select(
+      "schoolID schoolName schoolType address contactNumber schoolEmail establishedYear"
+    );
+
+    if (!admin) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    res.json({
+      success: true,
+      data: {
+        schoolID: admin.schoolID,
+        schoolName: admin.schoolName,
+        schoolType: admin.schoolType,
+        address: admin.address,
+        contactNumber: admin.contactNumber,
+        email: admin.schoolEmail,
+        establishedYear: admin.establishedYear,
+      },
+    });
+  } catch (error) {
+    console.error("Get school profile error:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+// Register Admin (School Owner)
+export const registerAdmin = [
+  body("name").notEmpty().withMessage("Name is required"),
+  body("email").isEmail().withMessage("Valid email is required"),
+  body("password")
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 characters"),
+  body("schoolName").notEmpty().withMessage("School name is required"),
+  body("schoolType")
+    .isIn(["boys", "girls", "mixed"])
+    .withMessage("School type must be boys, girls, or mixed"),
+
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+      const {
+        name,
+        email,
+        password,
+        schoolName,
+        schoolType,
+        address,
+        contactNumber,
+      } = req.body;
+
+      // Check if email already exists
+      const existingAdmin = await Admin.findOne({ email });
+      if (existingAdmin) {
+        return res.status(400).json({ message: "Email already registered" });
+      }
+
+      // Generate adminID and schoolID
+      const lastAdmin = await Admin.findOne().sort({ createdAt: -1 });
+      let adminCounter = 1;
+      let schoolCounter = 1;
+
+      if (lastAdmin) {
+        if (lastAdmin.adminID) {
+          const lastAdminNum = parseInt(lastAdmin.adminID.substring(3));
+          adminCounter = lastAdminNum + 1;
+        }
+        if (lastAdmin.schoolID) {
+          const lastSchoolNum = parseInt(lastAdmin.schoolID.substring(4, 7));
+          schoolCounter = lastSchoolNum + 1;
+        }
+      }
+
+      const adminID = `adm${String(adminCounter).padStart(4, "0")}`;
+      const typeCode =
+        schoolType === "boys" ? "b" : schoolType === "girls" ? "g" : "m";
+      const schoolID = `sch_${String(schoolCounter).padStart(
+        3,
+        "0"
+      )}${typeCode}`;
+
+      const admin = new Admin({
+        adminID,
+        name,
+        email,
+        password,
+        schoolName,
+        schoolID,
+        schoolType,
+        address,
+        contactNumber,
+        role: "principal",
+        status: "active",
+      });
+
+      await admin.save();
+
+      const token = jwt.sign(
+        { id: admin._id, adminID: admin.adminID, role: "admin" },
+        process.env.JWT_SECRET,
+        { expiresIn: "24h" }
+      );
+
+      res.status(201).json({
+        success: true,
+        message: "Admin registered successfully",
+        token,
+        admin: {
+          adminID,
+          schoolID,
+          name,
+          email,
+          schoolName,
+          role: admin.role,
+        },
+      });
+    } catch (error) {
+      console.error("Register admin error:", error);
+      if (error.name === "ValidationError") {
+        return res.status(400).json({ message: error.message });
+      }
+      res.status(500).json({ message: "Internal server error" });
+    }
+  },
+];

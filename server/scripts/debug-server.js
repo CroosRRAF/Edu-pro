@@ -4,9 +4,9 @@ import express from "express";
 import helmet from "helmet";
 
 // Import routes one by one to isolate the issue
-import adminRoutes from "./src/routes/adminRoutes.js";
-import authRoutes from "./src/routes/authRoutes.js";
-import studentRoutes from "./src/routes/studentRoutes.js";
+import adminRoutes from "../src/routes/adminRoutes.js";
+import authRoutes from "../src/routes/authRoutes.js";
+import studentRoutes from "../src/routes/studentRoutes.js";
 
 dotenv.config();
 

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const librarySchema = new mongoose.Schema(
+const libraryTransactionSchema = new mongoose.Schema(
   {
     bookID: {
       type: mongoose.Schema.Types.ObjectId,
@@ -25,5 +25,8 @@ const librarySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Library = mongoose.model("Library", librarySchema);
-export default Library;
+const LibraryTransaction = mongoose.model(
+  "LibraryTransaction",
+  libraryTransactionSchema
+);
+export default LibraryTransaction;

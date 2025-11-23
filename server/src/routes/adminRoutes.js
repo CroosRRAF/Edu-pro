@@ -1,95 +1,245 @@
 import express from "express";
 import {
-  adminLogin,
-  getDashboardOverview,
-  // Students
-  getAllStudents,
-  getStudentById,
-  createStudent,
-  updateStudent,
-  deleteStudent,
-  // Courses
-  getAllCourses,
-  createCourse,
-  updateCourse,
-  deleteCourse,
-  // Sports
-  getAllSports,
-  createSport,
-  updateSport,
-  deleteSport,
-  // Library
-  getAllBooks,
+  createAttendance,
   createBook,
-  updateBook,
+  createCoach,
+  createCourse,
+  createResult,
+  // School Profile
+  createSchoolProfile,
+  createSport,
+  createStudent,
+  deleteAttendance,
   deleteBook,
+  deleteCoach,
+  deleteCourse,
+  deleteResult,
+  deleteSport,
+  deleteStudent,
   // Attendance
   getAllAttendance,
-  createAttendance,
-  updateAttendance,
-  deleteAttendance,
-  // Results
-  getAllResults,
-  createResult,
-  updateResult,
-  deleteResult,
+  // Library
+  getAllBooks,
   // Coaches
   getAllCoaches,
-  createCoach,
+  // Courses
+  getAllCourses,
+  // Results
+  getAllResults,
+  // Sports
+  getAllSports,
+  // Students
+  getAllStudents,
+  getDashboardOverview,
+  getSchoolProfile,
+  getStudentById,
+  updateAttendance,
+  updateBook,
   updateCoach,
-  deleteCoach,
+  updateCourse,
+  updateResult,
+  updateSchoolProfile,
+  updateSport,
+  updateStudent,
 } from "../controllers/adminController.js";
-import { adminAuthMiddleware, checkPermission } from "../middlewares/adminAuth.js";
+import { adminAuth, checkPermission } from "../middlewares/auth.js";
 
 const router = express.Router();
 
-// Admin Authentication
-router.post("/login", adminLogin);
+// Dashboard (Admin only)
+router.get("/dashboard", adminAuth, getDashboardOverview);
 
-// Dashboard
-router.get("/dashboard", adminAuthMiddleware, getDashboardOverview);
+// School Profile Management
+router.post("/school/profile", adminAuth, createSchoolProfile);
+router.put("/school/profile", adminAuth, updateSchoolProfile);
+router.get("/school/profile", adminAuth, getSchoolProfile);
 
 // Students Routes
-router.get("/students", adminAuthMiddleware, checkPermission("students", "view"), getAllStudents);
-router.get("/students/:id", adminAuthMiddleware, checkPermission("students", "view"), getStudentById);
-router.post("/students", adminAuthMiddleware, checkPermission("students", "create"), createStudent);
-router.put("/students/:id", adminAuthMiddleware, checkPermission("students", "edit"), updateStudent);
-router.delete("/students/:id", adminAuthMiddleware, checkPermission("students", "delete"), deleteStudent);
+router.get(
+  "/students",
+  adminAuth,
+  checkPermission("students", "view"),
+  getAllStudents
+);
+router.get(
+  "/students/:id",
+  adminAuth,
+  checkPermission("students", "view"),
+  getStudentById
+);
+router.post(
+  "/students",
+  adminAuth,
+  checkPermission("students", "create"),
+  createStudent
+);
+router.put(
+  "/students/:id",
+  adminAuth,
+  checkPermission("students", "edit"),
+  updateStudent
+);
+router.delete(
+  "/students/:id",
+  adminAuth,
+  checkPermission("students", "delete"),
+  deleteStudent
+);
 
 // Courses Routes
-router.get("/courses", adminAuthMiddleware, checkPermission("courses", "view"), getAllCourses);
-router.post("/courses", adminAuthMiddleware, checkPermission("courses", "create"), createCourse);
-router.put("/courses/:id", adminAuthMiddleware, checkPermission("courses", "edit"), updateCourse);
-router.delete("/courses/:id", adminAuthMiddleware, checkPermission("courses", "delete"), deleteCourse);
+router.get(
+  "/courses",
+  adminAuth,
+  checkPermission("courses", "view"),
+  getAllCourses
+);
+router.post(
+  "/courses",
+  adminAuth,
+  checkPermission("courses", "create"),
+  createCourse
+);
+router.put(
+  "/courses/:id",
+  adminAuth,
+  checkPermission("courses", "edit"),
+  updateCourse
+);
+router.delete(
+  "/courses/:id",
+  adminAuth,
+  checkPermission("courses", "delete"),
+  deleteCourse
+);
 
 // Sports Routes
-router.get("/sports", adminAuthMiddleware, checkPermission("sports", "view"), getAllSports);
-router.post("/sports", adminAuthMiddleware, checkPermission("sports", "create"), createSport);
-router.put("/sports/:id", adminAuthMiddleware, checkPermission("sports", "edit"), updateSport);
-router.delete("/sports/:id", adminAuthMiddleware, checkPermission("sports", "delete"), deleteSport);
+router.get(
+  "/sports",
+  adminAuth,
+  checkPermission("sports", "view"),
+  getAllSports
+);
+router.post(
+  "/sports",
+  adminAuth,
+  checkPermission("sports", "create"),
+  createSport
+);
+router.put(
+  "/sports/:id",
+  adminAuth,
+  checkPermission("sports", "edit"),
+  updateSport
+);
+router.delete(
+  "/sports/:id",
+  adminAuth,
+  checkPermission("sports", "delete"),
+  deleteSport
+);
 
 // Library Routes
-router.get("/books", adminAuthMiddleware, checkPermission("library", "view"), getAllBooks);
-router.post("/books", adminAuthMiddleware, checkPermission("library", "create"), createBook);
-router.put("/books/:id", adminAuthMiddleware, checkPermission("library", "edit"), updateBook);
-router.delete("/books/:id", adminAuthMiddleware, checkPermission("library", "delete"), deleteBook);
+router.get(
+  "/books",
+  adminAuth,
+  checkPermission("library", "view"),
+  getAllBooks
+);
+router.post(
+  "/books",
+  adminAuth,
+  checkPermission("library", "create"),
+  createBook
+);
+router.put(
+  "/books/:id",
+  adminAuth,
+  checkPermission("library", "edit"),
+  updateBook
+);
+router.delete(
+  "/books/:id",
+  adminAuth,
+  checkPermission("library", "delete"),
+  deleteBook
+);
 
 // Attendance Routes
-router.get("/attendance", adminAuthMiddleware, checkPermission("attendance", "view"), getAllAttendance);
-router.post("/attendance", adminAuthMiddleware, checkPermission("attendance", "create"), createAttendance);
-router.put("/attendance/:id", adminAuthMiddleware, checkPermission("attendance", "edit"), updateAttendance);
-router.delete("/attendance/:id", adminAuthMiddleware, checkPermission("attendance", "delete"), deleteAttendance);
+router.get(
+  "/attendance",
+  adminAuth,
+  checkPermission("attendance", "view"),
+  getAllAttendance
+);
+router.post(
+  "/attendance",
+  adminAuth,
+  checkPermission("attendance", "create"),
+  createAttendance
+);
+router.put(
+  "/attendance/:id",
+  adminAuth,
+  checkPermission("attendance", "edit"),
+  updateAttendance
+);
+router.delete(
+  "/attendance/:id",
+  adminAuth,
+  checkPermission("attendance", "delete"),
+  deleteAttendance
+);
 
 // Results Routes
-router.get("/results", adminAuthMiddleware, checkPermission("results", "view"), getAllResults);
-router.post("/results", adminAuthMiddleware, checkPermission("results", "create"), createResult);
-router.put("/results/:id", adminAuthMiddleware, checkPermission("results", "edit"), updateResult);
-router.delete("/results/:id", adminAuthMiddleware, checkPermission("results", "delete"), deleteResult);
+router.get(
+  "/results",
+  adminAuth,
+  checkPermission("results", "view"),
+  getAllResults
+);
+router.post(
+  "/results",
+  adminAuth,
+  checkPermission("results", "create"),
+  createResult
+);
+router.put(
+  "/results/:id",
+  adminAuth,
+  checkPermission("results", "edit"),
+  updateResult
+);
+router.delete(
+  "/results/:id",
+  adminAuth,
+  checkPermission("results", "delete"),
+  deleteResult
+);
 
 // Coaches Routes
-router.get("/coaches", adminAuthMiddleware, checkPermission("coaches", "view"), getAllCoaches);
-router.post("/coaches", adminAuthMiddleware, checkPermission("coaches", "create"), createCoach);
-router.put("/coaches/:id", adminAuthMiddleware, checkPermission("coaches", "edit"), updateCoach);
-router.delete("/coaches/:id", adminAuthMiddleware, checkPermission("coaches", "delete"), deleteCoach);
+router.get(
+  "/coaches",
+  adminAuth,
+  checkPermission("coaches", "view"),
+  getAllCoaches
+);
+router.post(
+  "/coaches",
+  adminAuth,
+  checkPermission("coaches", "create"),
+  createCoach
+);
+router.put(
+  "/coaches/:id",
+  adminAuth,
+  checkPermission("coaches", "edit"),
+  updateCoach
+);
+router.delete(
+  "/coaches/:id",
+  adminAuth,
+  checkPermission("coaches", "delete"),
+  deleteCoach
+);
 
-export default router; 
+export default router;

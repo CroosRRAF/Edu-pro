@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
 import bcrypt from "bcrypt"; // ✅ Required for password hashing
+import mongoose from "mongoose";
 
 const studentSchema = new mongoose.Schema(
   {
@@ -27,6 +27,17 @@ const studentSchema = new mongoose.Schema(
       type: String,
       required: true,
       match: /^\+?\d{10,15}$/, // Supports + or plain digits
+    },
+    rollNum: {
+      type: Number,
+    },
+    classGroup: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ClassGroup",
+    },
+    school: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Admin",
     },
     status: {
       type: String,

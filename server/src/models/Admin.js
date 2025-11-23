@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import mongoose from "mongoose";
 
 const adminSchema = new mongoose.Schema(
   {
@@ -32,6 +32,11 @@ const adminSchema = new mongoose.Schema(
       type: String,
       enum: ["super_admin", "admin", "moderator"],
       default: "admin",
+    },
+    schoolName: {
+      type: String,
+      unique: true,
+      sparse: true, // Allows null/undefined values to not conflict
     },
     status: {
       type: String,
@@ -111,4 +116,4 @@ adminSchema.methods.hasPermission = function (resource, action) {
 };
 
 const Admin = mongoose.model("Admin", adminSchema);
-export default Admin; 
+export default Admin;

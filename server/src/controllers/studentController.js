@@ -1,11 +1,8 @@
-import express from "express";
-import Students from "../models/Students.js";
 import Attendance from "../models/Attendance.js";
 import Library from "../models/Library.js";
 import Results from "../models/Results.js";
-import Courses from "../models/Course.js";
 import Sports from "../models/Sports.js";
-import Modules from "../models/Modules.js";
+import Students from "../models/Students.js";
 
 import { body, validationResult } from "express-validator";
 
@@ -272,3 +269,127 @@ export const joinSport = [
     }
   },
 ];
+
+// =====================
+// Get Student Attendance
+// GET /api/students/attendance
+// =====================
+export const getAttendance = async (req, res) => {
+  try {
+    const { startDate, endDate } = req.query;
+    const filter = { student: req.user.id };
+
+    if (startDate && endDate) {
+      filter.date = {
+        $gte: new Date(startDate),
+        $lte: new Date(endDate),
+      };
+    }
+
+    const attendance = await Attendance.find(filter)
+      .select("date present status remarks")
+      .sort({ date: -1 });
+
+    if (attendance.length === 0) {
+      return res.status(404).json({ message: "No attendance records found" });
+    }
+
+    // Calculate attendance statistics
+    const totalDays = attendance.length;
+    const presentDays = attendance.filter((record) => record.present).length;
+    const absentDays = totalDays - presentDays;
+    const attendancePercentage = ((presentDays / totalDays) * 100).toFixed(2);
+
+    res.status(200).json({
+      message: "Attendance records retrieved successfully",
+      statistics: {
+        totalDays,
+        presentDays,
+        absentDays,
+        attendancePercentage: `${attendancePercentage}%`,
+      },
+      attendance,
+    });
+  } catch (error) {
+    console.error("Error in getAttendance controller:", error.message);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+// =====================
+// Get Student Results
+// GET /api/students/results
+// =====================
+export const getResults = async (req, res) => {
+  try {
+    const { grade, course } = req.query;
+    const filter = { student: req.user.id };
+
+    // Find student to get their classGroup and then grade
+    const student = await Students.findById(req.user.id).populate("classGroup");
+    if (!student) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+
+    // Get results with populated exam and module details
+    const results = await Results.find(filter)
+      .populate({
+        path: "exam",
+        select: "examID examName examType grade course module totalMarks",
+        populate: [
+          { path: "course", select: "courseName courseCode" },
+          { path: "module", select: "moduleName moduleID" },
+        ],
+      })
+      .select("marksObtained percentage grade remarks createdAt")
+      .sort({ createdAt: -1 });
+
+    if (results.length === 0) {
+      return res.status(404).json({ message: "No results found" });
+    }
+
+    // Filter by grade if provided
+    let filteredResults = results;
+    if (grade) {
+      filteredResults = results.filter(
+        (result) => result.exam && result.exam.grade === parseInt(grade)
+      );
+    }
+
+    // Filter by course if provided
+    if (course) {
+      filteredResults = filteredResults.filter(
+        (result) =>
+          result.exam &&
+          result.exam.course &&
+          result.exam.course._id.toString() === course
+      );
+    }
+
+    // Calculate overall statistics
+    const totalExams = filteredResults.length;
+    const averagePercentage = (
+      filteredResults.reduce((sum, result) => sum + result.percentage, 0) /
+      totalExams
+    ).toFixed(2);
+
+    // Grade distribution
+    const gradeDistribution = filteredResults.reduce((acc, result) => {
+      acc[result.grade] = (acc[result.grade] || 0) + 1;
+      return acc;
+    }, {});
+
+    res.status(200).json({
+      message: "Results retrieved successfully",
+      statistics: {
+        totalExams,
+        averagePercentage: `${averagePercentage}%`,
+        gradeDistribution,
+      },
+      results: filteredResults,
+    });
+  } catch (error) {
+    console.error("Error in getResults controller:", error.message);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};

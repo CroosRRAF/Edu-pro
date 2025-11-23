@@ -1,15 +1,15 @@
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import Admin from "./src/models/Admin.js";
-import Attendance from "./src/models/Attendance.js";
-import Books from "./src/models/Books.js";
-import Coaches from "./src/models/Coaches.js";
-import Course from "./src/models/Course.js";
-import Library from "./src/models/Library.js";
-import Modules from "./src/models/Modules.js";
-import Results from "./src/models/Results.js";
-import Sports from "./src/models/Sports.js";
-import Students from "./src/models/Students.js";
+import Admin from "../src/models/Admin.js";
+import Attendance from "../src/models/Attendance.js";
+import Books from "../src/models/Books.js";
+import Coaches from "../src/models/Coaches.js";
+import Course from "../src/models/Course.js";
+import Library from "../src/models/Library.js";
+import Modules from "../src/models/Modules.js";
+import Results from "../src/models/Results.js";
+import Sports from "../src/models/Sports.js";
+import Students from "../src/models/Students.js";
 
 dotenv.config();
 
