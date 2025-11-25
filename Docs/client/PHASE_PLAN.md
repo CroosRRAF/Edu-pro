@@ -1,5 +1,19 @@
 # 🗺️ Edu-Pro Client Development - Phase Plan
 
+> **📢 IMPORTANT UPDATE (November 25, 2025):**
+> This plan has been updated to align with the **UNIFIED_SYSTEM_SPECIFICATION.md**.
+> Critical additions include:
+>
+> - **School Profile Management** (onboarding workflow)
+> - **Grade & Classroom Management** (1-14 grades, sections A-E)
+> - **Course Module Management** (modules within courses)
+> - **Examination Creation & Scheduling** (before results entry)
+> - **Attendance Finalization** (deadline management)
+>
+> **⚠️ Development Priority:** School Setup must be implemented FIRST as it's required for all other modules.
+
+---
+
 ## 📋 Project Overview
 
 **Project**: Edu-Pro Learning Management System - Client Application
@@ -127,10 +141,14 @@
 
 #### **Deliverables**
 
-- 60+ files created
-- 5000+ lines of code
+- 60+ files created (NOW: 70+ files with new additions)
+- 5000+ lines of code (NOW: 6000+ lines with new features)
 - 100+ API endpoints
 - Complete infrastructure for all 5 roles
+- **NEW**: School onboarding workflow
+- **NEW**: Grade & Classroom management system
+- **NEW**: Course module management
+- **NEW**: Examination creation & scheduling
 - Comprehensive documentation
 
 ---
@@ -145,6 +163,20 @@
 
 **Priority: HIGH**
 **Status**: ✅ All 35 pages completed
+
+- [x] **School Profile Management** ✅ **NEW - CRITICAL**
+
+  - [x] School Profile Setup (onboarding wizard) - `SchoolProfileSetup.jsx`
+  - [x] School Profile View/Edit - `SchoolProfile.jsx`
+  - [x] School Type Selection (Boys/Girls/Mixed) - integrated in setup
+  - [x] Principal Profile Setup - `PrincipalProfile.jsx`
+
+- [x] **Grade & Classroom Management** ✅ **NEW - CRITICAL**
+
+  - [x] Grade List & Creation (1-14) - `GradeList.jsx`, `CreateGrade.jsx`
+  - [x] Classroom Management (sections A-E, 30 students/class) - `ClassroomManagement.jsx`
+  - [x] Grade Detail View (sections, students, teachers) - `GradeDetail.jsx`
+  - [x] Bulk Grade Creation (create all grades at once) - integrated in CreateGrade
 
 - [x] **Student Management** ✅
 
@@ -166,7 +198,7 @@
   - [x] Course List Page - `CourseList.jsx`
   - [x] Create/Edit Course Form - `CreateCourse.jsx`, `EditCourse.jsx`
   - [x] Course Detail View (enrolled students, modules, schedule) - `CourseDetail.jsx`
-  - [x] Module Management (integrated in Course Detail)
+  - [x] Module Management (create/edit/delete modules within courses) - `ModuleManagement.jsx`
 
 - [x] **Sports Management** ✅
 
@@ -186,55 +218,60 @@
   - [x] Class Attendance Report - `AttendanceReport.jsx`
   - [x] Student Attendance Detail - `StudentAttendance.jsx`
   - [x] Mark Attendance - `MarkAttendance.jsx`
+  - [x] Attendance Finalization (deadline management) - `AttendanceFinalization.jsx`
 
-- [x] **Results Management** ✅
+- [x] **Examination & Results Management** ✅ **UPDATED**
 
+  - [x] Exam Creation & Scheduling - `CreateExam.jsx`, `ExamSchedule.jsx`
+  - [x] Exam List & Management - `ExamList.jsx`
   - [x] Results Entry Form - `EnterResults.jsx`
   - [x] Results Report by Class - `ResultsReport.jsx`
   - [x] Student Results Detail - `StudentResult.jsx`
   - [x] Results Analytics - `ResultsList.jsx` (with analytics)
+  - [x] Results Publishing - integrated in EnterResults
 
 - [x] **Notices & Complaints** ✅
   - [x] Notice Board (create, edit, delete) - `NoticesList.jsx`, `CreateNotice.jsx`, `EditNotice.jsx`
   - [x] Complaint Management (view, respond, resolve) - `ComplaintsList.jsx`, `ComplaintDetail.jsx`
 
-#### **2.2 Student Feature Pages** (Week 2)
+#### **2.2 Student Feature Pages** ✅ **COMPLETE** (Week 2)
 
 **Priority: HIGH**
+**Status**: ✅ Complete - All 14 pages finished
 
-- [ ] **Course Pages**
+- [x] **Course Pages** ✅ **COMPLETE**
 
-  - [ ] My Courses (enrolled courses list)
-  - [ ] Course Enrollment (browse & enroll)
-  - [ ] Course Detail (modules, materials, schedule)
+  - [x] My Courses (enrolled courses list) - `MyCourses.jsx`
+  - [x] Course Enrollment (browse & enroll) - `CourseEnrollment.jsx`
+  - [x] Course Detail (modules, materials, schedule) - `CourseDetail.jsx`
 
-- [ ] **Attendance Pages**
+- [x] **Attendance Pages** ✅ **COMPLETE**
 
-  - [ ] Attendance Calendar (monthly view)
-  - [ ] Attendance Statistics (charts)
+  - [x] My Attendance (monthly view with filters) - `MyAttendance.jsx`
+  - [x] Attendance Report (yearly analytics) - `AttendanceReport.jsx`
 
-- [ ] **Results Pages**
+- [x] **Results Pages** ✅ **COMPLETE**
 
-  - [ ] My Results (all exams)
-  - [ ] Result Detail (subject-wise breakdown)
-  - [ ] Performance Analytics (charts)
+  - [x] My Results (all exams with filtering) - `MyResults.jsx`
+  - [x] Results Analysis (performance analytics & charts) - `ResultsAnalysis.jsx`
+  - [x] Exam Result Detail (detailed view of single exam) - `ExamResultDetail.jsx`
 
-- [ ] **Sports Pages**
+- [x] **Sports Pages** ✅ **COMPLETE**
 
-  - [ ] Sports Registration
-  - [ ] My Sports (enrolled sports)
-  - [ ] Sports Events Calendar
+  - [x] My Sports (joined sports activities) - `MySports.jsx`
+  - [x] Join Sport (browse & join available sports) - `JoinSport.jsx`
+  - [x] Sport Detail (sessions, participants, schedule) - `SportDetail.jsx`
 
-- [ ] **Library Pages**
+- [x] **Library Pages** ✅ **COMPLETE**
 
-  - [ ] Book Catalog (search & browse)
-  - [ ] My Books (issued books)
-  - [ ] Book Request
+  - [x] Book Catalog (search & browse) - `BookCatalog.jsx`
+  - [x] My Books (issued books with due dates) - `MyBooks.jsx`
+  - [x] Book Request (request new books) - `BookRequest.jsx`
 
-- [ ] **Profile & Settings**
-  - [ ] Edit Profile
-  - [ ] Change Password
-  - [ ] Notification Settings
+- [x] **Profile & Settings** ✅ **COMPLETE**
+  - [x] Edit Profile (personal information) - `EditProfile.jsx`
+  - [x] Change Password (security) - `ChangePassword.jsx`
+  - [x] Notification Settings (preferences) - `NotificationSettings.jsx`
 
 #### **2.3 Teacher Feature Pages** (Week 3)
 
@@ -477,25 +514,28 @@
 | Phase               | Status      | Progress | ETA       |
 | ------------------- | ----------- | -------- | --------- |
 | Phase 1: Foundation | ✅ Complete | 100%     | Completed |
-| Phase 2: Features   | 🚧 Planning | 0%       | 3-4 weeks |
+| Phase 2: Features   | 🚧 Progress | 75%      | 1-2 weeks |
 | Phase 3: Advanced   | 📅 Planned  | 0%       | 2-3 weeks |
 | Phase 4: Polish     | 🔮 Future   | 0%       | 2 weeks   |
 
 ### **Phase 2 Breakdown**
 
-| Feature Area       | Priority | Status   | Progress |
-| ------------------ | -------- | -------- | -------- |
-| Admin - Students   | HIGH     | 🚧 Ready | 0%       |
-| Admin - Teachers   | HIGH     | 🚧 Ready | 0%       |
-| Admin - Courses    | HIGH     | 🚧 Ready | 0%       |
-| Admin - Sports     | HIGH     | 🚧 Ready | 0%       |
-| Admin - Library    | HIGH     | 🚧 Ready | 0%       |
-| Admin - Attendance | HIGH     | 🚧 Ready | 0%       |
-| Admin - Results    | HIGH     | 🚧 Ready | 0%       |
-| Student Pages      | HIGH     | 🚧 Ready | 0%       |
-| Teacher Pages      | MEDIUM   | 🚧 Ready | 0%       |
-| Coach Pages        | MEDIUM   | 🚧 Ready | 0%       |
-| Librarian Pages    | MEDIUM   | 🚧 Ready | 0%       |
+| Feature Area            | Priority | Status      | Progress | Notes                      |
+| ----------------------- | -------- | ----------- | -------- | -------------------------- |
+| Admin - School Setup    | CRITICAL | ✅ Complete | 100%     | **COMPLETED**              |
+| Admin - Grades          | CRITICAL | ✅ Complete | 100%     | Required before classrooms |
+| Admin - Students        | HIGH     | ✅ Complete | 100%     |                            |
+| Admin - Teachers        | HIGH     | ✅ Complete | 100%     |                            |
+| Admin - Courses/Modules | HIGH     | ✅ Complete | 100%     | Module management added    |
+| Admin - Sports          | HIGH     | ✅ Complete | 100%     |                            |
+| Admin - Library         | HIGH     | ✅ Complete | 100%     |                            |
+| Admin - Attendance      | HIGH     | ✅ Complete | 100%     | With finalization feature  |
+| Admin - Examinations    | HIGH     | ✅ Complete | 100%     | **COMPLETED**              |
+| Admin - Results         | HIGH     | ✅ Complete | 100%     |                            |
+| Student Pages           | HIGH     | ✅ Complete | 100%     | **14/14 pages complete**   |
+| Teacher Pages           | MEDIUM   | 🚧 Ready    | 0%       |                            |
+| Coach Pages             | MEDIUM   | 🚧 Ready    | 0%       |                            |
+| Librarian Pages         | MEDIUM   | 🚧 Ready    | 0%       |                            |
 
 ---
 
@@ -503,17 +543,20 @@
 
 ### **Week 1-2: Admin Core Features**
 
-1. Student Management (most critical)
-2. Teacher Management
-3. Course Management
-4. Attendance Management
+1. **School Setup & Onboarding** (CRITICAL - MUST BE FIRST)
+2. Grade & Classroom Management
+3. Student Management (most critical)
+4. Teacher Management
+5. Course & Module Management
+6. Attendance Management
 
 ### **Week 2-3: Student & Results**
 
-1. Student Course Pages
-2. Student Attendance View
-3. Results Management (Admin)
-4. Student Results View
+1. **Examination Management** (Admin - CRITICAL)
+2. Student Course Pages
+3. Student Attendance View
+4. Results Management (Admin)
+5. Student Results View
 
 ### **Week 3: Teacher & Coach**
 
@@ -556,6 +599,26 @@
 
 ## 📝 Notes
 
+### **CRITICAL: Implementation Dependencies (Updated Nov 25, 2025)**
+
+**⚠️ STRICT IMPLEMENTATION ORDER:**
+
+1. **School Profile Setup** - MUST be completed first (creates school_id, sets school type)
+2. **Principal Profile** - Required after school setup
+3. **Grade Creation** - Needed before classrooms and students
+4. **Classroom Management** - Auto-created based on student count (30/class, max 5 sections)
+5. **Student/Teacher/Course Management** - Can proceed after above
+6. **Examination Setup** - MUST be created before results entry
+7. **Results Entry** - Depends on exams being created
+
+**Why This Order Matters:**
+
+- School ID is used in student/teacher ID generation (`stu_XXX_schoolID`, `tch_XXX_schoolID`)
+- School type (Boys/Girls/Mixed) validates student gender during registration
+- Grades determine classroom sections (automatically A-E based on student count)
+- Exams must exist before teachers can enter results
+- Course modules are managed within course detail pages
+
 ### **Phase 1 Learnings**
 
 - Feature-based folder structure scales well
@@ -566,6 +629,13 @@
 
 ### **Considerations for Phase 2**
 
+- **School Onboarding:** Implement wizard-style multi-step form for school setup
+- **Grade & Classroom:** Auto-calculate sections based on student count (30 per class)
+- **ID Generation:** Ensure school_id is available before creating students/teachers
+- **Gender Validation:** Check school type before allowing student registration
+- **Module Management:** Nested within course detail, not separate page
+- **Exam Scheduling:** Calendar integration for exam dates
+- **Attendance Deadlines:** Implement finalization system (auto-finalize after 15 days)
 - Use react-hook-form for complex forms
 - Implement proper error boundaries
 - Add loading states everywhere
@@ -590,11 +660,16 @@
 
 ### **Phase 2 Completion Criteria**
 
+- [ ] School onboarding wizard completed and tested
+- [ ] Grade creation (1-14) and classroom auto-allocation working
 - [ ] All admin CRUD operations working
+- [ ] School type validation enforced for student registration
+- [ ] Examination creation and scheduling functional
 - [ ] All student self-service features working
-- [ ] Teacher can manage classes and attendance
+- [ ] Teacher can manage classes and attendance with finalization
 - [ ] Coach can manage sports and events
 - [ ] Librarian can manage books and transactions
+- [ ] Course module management within course details
 - [ ] All forms have validation
 - [ ] All pages have loading states
 - [ ] All pages have error handling
@@ -620,6 +695,7 @@
 
 ---
 
-**Last Updated**: November 24, 2025
-**Current Phase**: Phase 1 Complete ✅ | Phase 2 Planning 🚧
-**Next Milestone**: Start Admin Student Management Pages
+**Last Updated**: November 25, 2025
+**Current Phase**: Phase 2.2 Complete ✅ | Phase 2.3 Ready 🚧
+**Next Milestone**: Start **Teacher Feature Pages**
+**Reference**: See `Docs/updates/UNIFIED_SYSTEM_SPECIFICATION.md` for complete system requirements
