@@ -192,7 +192,7 @@ export const getIssuedBooks = async () => {
 /**
  * Export librarian service
  */
-const librarianService = {
+export const librarianService = {
   getDashboard,
   getProfile,
   updateProfile,

@@ -10,12 +10,12 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Pagination } from "../../../components/common";
 import Badge from "../../../components/common/Badge";
 import Button from "../../../components/common/Button";
 import Input from "../../../components/common/Input";
 import Loader from "../../../components/common/Loader";
 import Modal from "../../../components/common/Modal";
-import Pagination from "../../../components/common/Pagination";
 import Select from "../../../components/common/Select";
 import Table from "../../../components/common/Table";
 import { ROUTES } from "../../../constants/routes";

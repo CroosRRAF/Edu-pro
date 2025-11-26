@@ -178,3 +178,7 @@ export const validateForm = (values, rules) => {
     errors,
   };
 };
+
+// Aliases for compatibility
+export const validateEmail = isValidEmail;
+export const validatePhone = isValidPhone;

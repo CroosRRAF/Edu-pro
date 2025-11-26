@@ -17,11 +17,16 @@ import {
   Users,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { BarChart, DonutChart, LineChart } from "../components/charts";
+import { DashboardSkeleton } from "../components/common";
 import Button from "../components/common/Button";
-import { ReportBuilder } from "../components/export";
 import { ActivityFeed, NotificationBell } from "../components/realtime";
 import api from "../utils/axiosInstance";
+import {
+  LazyBarChart as BarChart,
+  LazyDonutChart as DonutChart,
+  LazyLineChart as LineChart,
+  LazyReportBuilder as ReportBuilder,
+} from "../utils/lazyLoad";
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -131,11 +136,8 @@ const AdminDashboard = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading dashboard...</p>
-        </div>
+      <div className="min-h-screen bg-gray-50">
+        <DashboardSkeleton />
       </div>
     );
   }

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import {
   Bar,
   CartesianGrid,
@@ -154,4 +155,4 @@ const BarChart = ({
   );
 };
 
-export default BarChart;
+export default memo(BarChart);

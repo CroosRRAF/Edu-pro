@@ -12,14 +12,13 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Pagination, TableSkeleton } from "../../../components/common";
 import Alert from "../../../components/common/Alert";
 import Badge from "../../../components/common/Badge";
 import Button from "../../../components/common/Button";
 import Card from "../../../components/common/Card";
 import Input from "../../../components/common/Input";
-import Loader from "../../../components/common/Loader";
 import Modal from "../../../components/common/Modal";
-import Pagination from "../../../components/common/Pagination";
 import Select from "../../../components/common/Select";
 import Table from "../../../components/common/Table";
 import { ROUTES } from "../../../constants/routes";
@@ -224,8 +223,8 @@ export default function SportsList() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <Loader size="lg" />
+      <div className="space-y-6">
+        <TableSkeleton />
       </div>
     );
   }

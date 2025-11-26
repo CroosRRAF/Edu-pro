@@ -163,7 +163,7 @@ export const getNotices = async () => {
 /**
  * Export coach service
  */
-const coachService = {
+export const coachService = {
   getDashboard,
   getProfile,
   updateProfile,

@@ -10,18 +10,17 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Pagination } from "../../../components/common";
 import Badge from "../../../components/common/Badge";
 import Button from "../../../components/common/Button";
 import Input from "../../../components/common/Input";
-import Loader from "../../../components/common/Loader";
 import Modal from "../../../components/common/Modal";
-import Pagination from "../../../components/common/Pagination";
 import Select from "../../../components/common/Select";
 import Table from "../../../components/common/Table";
-import { ExportButton } from "../../../components/export";
 import { ROUTES } from "../../../constants/routes";
 import { adminService } from "../../../services/adminService";
 import { studentListReportTemplate } from "../../../utils/exportHelpers";
+import { LazyExportButton as ExportButton } from "../../../utils/lazyLoad";
 
 export default function StudentList() {
   const [students, setStudents] = useState([]);

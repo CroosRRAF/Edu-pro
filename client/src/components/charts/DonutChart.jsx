@@ -1,3 +1,4 @@
+import { memo } from "react";
 import {
   Cell,
   Legend,
@@ -143,4 +144,4 @@ const DonutChart = ({
   );
 };
 
-export default DonutChart;
+export default memo(DonutChart);

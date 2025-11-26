@@ -195,6 +195,35 @@ export const formatDateForInput = (date) => {
 };
 
 /**
+ * Format date (MM/DD/YYYY)
+ */
+export const formatDate = (date) => {
+  if (!date) return "";
+  const dateObj = date instanceof Date ? date : new Date(date);
+  return dateObj.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+};
+
+/**
+ * Format date and time (MM/DD/YYYY HH:MM AM/PM)
+ */
+export const formatDateTime = (date) => {
+  if (!date) return "";
+  const dateObj = date instanceof Date ? date : new Date(date);
+  return dateObj.toLocaleString("en-US", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
+};
+
+/**
  * Get day name
  */
 export const getDayName = (date, short = false) => {

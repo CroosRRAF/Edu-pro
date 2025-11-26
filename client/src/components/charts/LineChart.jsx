@@ -1,3 +1,4 @@
+import { memo } from "react";
 import {
   CartesianGrid,
   Legend,
@@ -134,4 +135,4 @@ const LineChart = ({
   );
 };
 
-export default LineChart;
+export default memo(LineChart);
