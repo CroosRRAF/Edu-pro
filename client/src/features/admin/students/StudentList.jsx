@@ -62,7 +62,7 @@ export default function StudentList() {
         status: statusFilter,
       };
 
-      const response = await adminService.getStudents(params);
+      const response = await adminService.getAllStudents(params);
 
       if (response.data.success) {
         setStudents(response.data.data || []);

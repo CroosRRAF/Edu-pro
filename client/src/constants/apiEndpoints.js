@@ -1,8 +1,9 @@
 /**
  * API endpoints configuration
+ * Note: API_VERSION is empty because /api/v1 is already in the baseURL
  */
 
-const API_VERSION = "/api/v1";
+const API_VERSION = "";
 
 export const API_ENDPOINTS = {
   // Auth endpoints
@@ -48,14 +49,14 @@ export const API_ENDPOINTS = {
 
   // Student endpoints
   STUDENT: {
-    DASHBOARD: (id) => `${API_VERSION}/student/${id}/dashboard`,
-    PROFILE: `${API_VERSION}/student/profile`,
-    COURSES: `${API_VERSION}/student/courses`,
-    ENROLL_COURSE: `${API_VERSION}/student/courses/enroll`,
-    SPORTS: `${API_VERSION}/student/sports`,
-    JOIN_SPORT: `${API_VERSION}/student/sports/join`,
-    ATTENDANCE: `${API_VERSION}/student/attendance`,
-    RESULTS: `${API_VERSION}/student/results`,
+    DASHBOARD: (id) => `${API_VERSION}/students/${id}/dashboard`,
+    PROFILE: `${API_VERSION}/students/profile`,
+    COURSES: `${API_VERSION}/students/courses`,
+    ENROLL_COURSE: `${API_VERSION}/students/courses/enroll`,
+    SPORTS: `${API_VERSION}/students/sports`,
+    JOIN_SPORT: `${API_VERSION}/students/sports/join`,
+    ATTENDANCE: `${API_VERSION}/students/attendance`,
+    RESULTS: `${API_VERSION}/students/results`,
   },
 
   // Teacher endpoints

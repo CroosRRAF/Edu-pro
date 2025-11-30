@@ -1,4 +1,6 @@
 import dotenv from "dotenv";
+import http from "http";
+import { Server } from "socket.io";
 import app from "./app.js";
 import { connectDB } from "./config/connectDB.js";
 
@@ -42,12 +44,47 @@ process.on("unhandledRejection", (reason, promise) => {
 // =====================
 connectDB()
   .then(() => {
-    app.listen(PORT, () => {
+    // Create HTTP server
+    const server = http.createServer(app);
+
+    // Initialize Socket.IO
+    const io = new Server(server, {
+      cors: {
+        origin:
+          process.env.NODE_ENV === "production"
+            ? process.env.FRONTEND_URL
+            : ["http://localhost:5173", "http://localhost:3000"],
+        credentials: true,
+        methods: ["GET", "POST"],
+      },
+    });
+
+    // Socket.IO connection handling
+    io.on("connection", (socket) => {
+      console.log(`🔌 Client connected: ${socket.id}`);
+
+      // Join user to their room based on user ID
+      socket.on("join", (userId) => {
+        socket.join(`user:${userId}`);
+        console.log(`User ${userId} joined their room`);
+      });
+
+      // Handle disconnection
+      socket.on("disconnect", () => {
+        console.log(`🔌 Client disconnected: ${socket.id}`);
+      });
+    });
+
+    // Make io accessible to routes
+    app.set("io", io);
+
+    server.listen(PORT, () => {
       console.log("=".repeat(50));
       console.log(`🚀 Server running on port ${PORT}`);
       console.log(`📊 Environment: ${process.env.NODE_ENV || "development"}`);
       console.log(`🔗 Health check: http://localhost:${PORT}/health`);
       console.log(`📚 API Base URL: http://localhost:${PORT}/api/v1`);
+      console.log(`🔌 WebSocket: Socket.IO enabled`);
       console.log("=".repeat(50));
     });
   })

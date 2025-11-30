@@ -21,6 +21,7 @@
   "author": "School Management Team",
   "license": "MIT",
   "dependencies": {
+    "@sentry/react": "^10.27.0",
     "@tinymce/tinymce-react": "^6.3.0",
     "axios": "^1.10.0",
     "file-saver": "^2.0.5",
@@ -33,6 +34,7 @@
     "react-helmet-async": "^2.0.5",
     "react-hook-form": "^7.59.0",
     "react-router-dom": "^7.6.3",
+    "react-toastify": "^11.0.5",
     "react-window": "^2.2.3",
     "recharts": "^3.5.0",
     "socket.io-client": "^4.8.1",

@@ -58,7 +58,7 @@ const Unauthorized = () => {
           <Button
             variant="primary"
             onClick={handleLogin}
-            icon={LogIn}
+            icon={<LogIn className="h-4 w-4" />}
             size="lg"
           >
             Login
@@ -66,12 +66,17 @@ const Unauthorized = () => {
           <Button
             variant="secondary"
             onClick={() => navigate("/")}
-            icon={Home}
+            icon={<Home className="h-4 w-4" />}
             size="lg"
           >
             Go to Home
           </Button>
-          <Button variant="outline" onClick={goBack} icon={ArrowLeft} size="lg">
+          <Button
+            variant="outline"
+            onClick={goBack}
+            icon={<ArrowLeft className="h-4 w-4" />}
+            size="lg"
+          >
             Go Back
           </Button>
         </div>

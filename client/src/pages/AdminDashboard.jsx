@@ -17,9 +17,11 @@ import {
   Users,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { DashboardSkeleton } from "../components/common";
 import Button from "../components/common/Button";
 import { ActivityFeed, NotificationBell } from "../components/realtime";
+import { ROUTES } from "../constants/routes";
 import api from "../utils/axiosInstance";
 import {
   LazyBarChart as BarChart,
@@ -29,6 +31,7 @@ import {
 } from "../utils/lazyLoad";
 
 const AdminDashboard = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState("overview");
   const [data, setData] = useState({
     students: [],
@@ -394,13 +397,20 @@ const AdminDashboard = () => {
           <h2 className="text-xl font-semibold text-gray-900">
             Students Management
           </h2>
-          <button
-            onClick={() => openModal("add-student")}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700"
-          >
-            <Plus className="h-4 w-4" />
-            Add Student
-          </button>
+          <div className="flex gap-2">
+            <Link to={ROUTES.ADMIN_ROUTES.STUDENTS}>
+              <button className="bg-gray-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-gray-700">
+                <Users className="h-4 w-4" />
+                Manage Students
+              </button>
+            </Link>
+            <Link to={`${ROUTES.ADMIN_ROUTES.STUDENTS}/create`}>
+              <button className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-blue-700">
+                <Plus className="h-4 w-4" />
+                Add Student
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
       <div className="overflow-x-auto">
@@ -455,21 +465,28 @@ const AdminDashboard = () => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <div className="flex space-x-2">
-                    <button
-                      onClick={() => openModal("view-student", student)}
-                      className="text-blue-600 hover:text-blue-900"
+                    <Link to={`${ROUTES.ADMIN_ROUTES.STUDENTS}/${student._id}`}>
+                      <button
+                        className="text-blue-600 hover:text-blue-900"
+                        title="View Details"
+                      >
+                        <Eye className="h-4 w-4" />
+                      </button>
+                    </Link>
+                    <Link
+                      to={`${ROUTES.ADMIN_ROUTES.STUDENTS}/edit/${student._id}`}
                     >
-                      <Eye className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={() => openModal("edit-student", student)}
-                      className="text-green-600 hover:text-green-900"
-                    >
-                      <Edit className="h-4 w-4" />
-                    </button>
+                      <button
+                        className="text-green-600 hover:text-green-900"
+                        title="Edit Student"
+                      >
+                        <Edit className="h-4 w-4" />
+                      </button>
+                    </Link>
                     <button
                       onClick={() => openModal("delete-student", student)}
                       className="text-red-600 hover:text-red-900"
+                      title="Delete Student"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>

@@ -63,16 +63,59 @@ const LandingPage = () => {
                 School Management System
               </h1>
             </div>
-            <div className="flex space-x-4">
+            <div className="flex flex-wrap gap-2">
               <Link
-                to={ROUTES.LOGIN}
-                className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                to={ROUTES.STUDENT_LOGIN}
+                className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
               >
                 Student Login
               </Link>
               <Link
+                to={ROUTES.TEACHER_LOGIN}
+                className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Teacher Login
+              </Link>
+              <Link
+                to={ROUTES.COACH_LOGIN}
+                className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Coach Login
+              </Link>
+              <Link
+                to={ROUTES.LIBRARIAN_LOGIN}
+                className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Librarian Login
+              </Link>
+              <span className="mx-2 hidden sm:inline text-gray-300">|</span>
+              <Link
+                to={ROUTES.STUDENT_REGISTER}
+                className="text-blue-600 hover:text-blue-800 px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Student Register
+              </Link>
+              <Link
+                to={ROUTES.TEACHER_REGISTER}
+                className="text-blue-600 hover:text-blue-800 px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Teacher Register
+              </Link>
+              <Link
+                to={ROUTES.COACH_REGISTER}
+                className="text-blue-600 hover:text-blue-800 px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Coach Register
+              </Link>
+              <Link
+                to={ROUTES.LIBRARIAN_REGISTER}
+                className="text-blue-600 hover:text-blue-800 px-3 py-2 rounded-md text-sm font-medium"
+              >
+                Librarian Register
+              </Link>
+              <Link
                 to={ROUTES.ADMIN_LOGIN}
-                className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                className="ml-auto text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
               >
                 Admin Login
               </Link>
@@ -104,23 +147,67 @@ const LandingPage = () => {
                   sports, library, attendance, and academic results. Choose your
                   role to get started.
                 </p>
-                <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                  <div className="rounded-md shadow">
-                    <Link
-                      to={ROUTES.LOGIN}
-                      className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10"
-                    >
-                      Student Portal
-                    </Link>
-                  </div>
-                  <div className="mt-3 sm:mt-0 sm:ml-3">
-                    <Link
-                      to={ROUTES.ADMIN_LOGIN}
-                      className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 md:py-4 md:text-lg md:px-10"
-                    >
-                      Admin Portal
-                    </Link>
-                  </div>
+                <div className="mt-5 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  <Link
+                    to={ROUTES.STUDENT_LOGIN}
+                    className="flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                  >
+                    Student Login
+                  </Link>
+                  <Link
+                    to={ROUTES.STUDENT_REGISTER}
+                    className="flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200"
+                  >
+                    Student Register
+                  </Link>
+                  <Link
+                    to={ROUTES.TEACHER_LOGIN}
+                    className="flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+                  >
+                    Teacher Login
+                  </Link>
+                  <Link
+                    to={ROUTES.TEACHER_REGISTER}
+                    className="flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200"
+                  >
+                    Teacher Register
+                  </Link>
+                  <Link
+                    to={ROUTES.COACH_LOGIN}
+                    className="flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700"
+                  >
+                    Coach Login
+                  </Link>
+                  <Link
+                    to={ROUTES.COACH_REGISTER}
+                    className="flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-purple-700 bg-purple-100 hover:bg-purple-200"
+                  >
+                    Coach Register
+                  </Link>
+                  <Link
+                    to={ROUTES.LIBRARIAN_LOGIN}
+                    className="flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700"
+                  >
+                    Librarian Login
+                  </Link>
+                  <Link
+                    to={ROUTES.LIBRARIAN_REGISTER}
+                    className="flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-teal-700 bg-teal-100 hover:bg-teal-200"
+                  >
+                    Librarian Register
+                  </Link>
+                  <Link
+                    to={ROUTES.ADMIN_LOGIN}
+                    className="flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-900"
+                  >
+                    Admin Login
+                  </Link>
+                  <Link
+                    to={ROUTES.ADMIN_REGISTER}
+                    className="flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-gray-800 bg-gray-100 hover:bg-gray-200"
+                  >
+                    Admin Register
+                  </Link>
                 </div>
               </div>
             </main>
@@ -217,23 +304,67 @@ const LandingPage = () => {
             Join thousands of students and administrators who trust our platform
             for their educational needs.
           </p>
-          <div className="mt-8 flex justify-center">
-            <div className="inline-flex rounded-md shadow">
-              <Link
-                to={ROUTES.LOGIN}
-                className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50"
-              >
-                Student Login
-              </Link>
-            </div>
-            <div className="ml-3 inline-flex">
-              <Link
-                to={ROUTES.ADMIN_LOGIN}
-                className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-500 hover:bg-blue-400"
-              >
-                Admin Login
-              </Link>
-            </div>
+          <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-3 justify-center">
+            <Link
+              to={ROUTES.STUDENT_LOGIN}
+              className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50"
+            >
+              Student Login
+            </Link>
+            <Link
+              to={ROUTES.STUDENT_REGISTER}
+              className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-500"
+            >
+              Student Register
+            </Link>
+            <Link
+              to={ROUTES.TEACHER_LOGIN}
+              className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50"
+            >
+              Teacher Login
+            </Link>
+            <Link
+              to={ROUTES.TEACHER_REGISTER}
+              className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500"
+            >
+              Teacher Register
+            </Link>
+            <Link
+              to={ROUTES.COACH_LOGIN}
+              className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-purple-600 bg-white hover:bg-purple-50"
+            >
+              Coach Login
+            </Link>
+            <Link
+              to={ROUTES.COACH_REGISTER}
+              className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-purple-600 hover:bg-purple-500"
+            >
+              Coach Register
+            </Link>
+            <Link
+              to={ROUTES.LIBRARIAN_LOGIN}
+              className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-teal-600 bg-white hover:bg-teal-50"
+            >
+              Librarian Login
+            </Link>
+            <Link
+              to={ROUTES.LIBRARIAN_REGISTER}
+              className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-teal-600 hover:bg-teal-500"
+            >
+              Librarian Register
+            </Link>
+            <Link
+              to={ROUTES.ADMIN_LOGIN}
+              className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50"
+            >
+              Admin Login
+            </Link>
+            <Link
+              to={ROUTES.ADMIN_REGISTER}
+              className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-700"
+            >
+              Admin Register
+            </Link>
           </div>
         </div>
       </div>

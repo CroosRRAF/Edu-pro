@@ -394,3 +394,71 @@ export const getResults = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+/**
+ * Get student's enrolled courses
+ * @route GET /api/v1/students/courses
+ * @access Private (Student)
+ */
+export const getCourses = async (req, res) => {
+  try {
+    const studentId = req.user.id;
+
+    const student = await Student.findById(studentId)
+      .populate({
+        path: "courses.courseID",
+        select: "courseName courseCode description modules",
+        populate: {
+          path: "modules",
+          select: "moduleName moduleCode credits",
+        },
+      })
+      .select("courses");
+
+    if (!student) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+
+    res.status(200).json({
+      message: "Courses retrieved successfully",
+      courses: student.courses,
+    });
+  } catch (error) {
+    console.error("Error in getCourses controller:", error.message);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+/**
+ * Get student's sports activities
+ * @route GET /api/v1/students/sports
+ * @access Private (Student)
+ */
+export const getSports = async (req, res) => {
+  try {
+    const studentId = req.user.id;
+
+    const student = await Student.findById(studentId)
+      .populate({
+        path: "sports.sportID",
+        select: "sportName sportType coach schedule",
+        populate: {
+          path: "coach",
+          select: "name email",
+        },
+      })
+      .select("sports");
+
+    if (!student) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+
+    res.status(200).json({
+      message: "Sports activities retrieved successfully",
+      sports: student.sports,
+    });
+  } catch (error) {
+    console.error("Error in getSports controller:", error.message);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};

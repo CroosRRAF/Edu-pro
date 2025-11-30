@@ -6,7 +6,7 @@ import "./index.css";
 
 // Import error handling utilities
 import { initializeErrorLogging } from "./utils/errorLogger";
-import { initGlobalErrorHandlers } from "./utils/globalErrorHandler";
+import { initGlobalErrorHandlers } from "./utils/globalErrorHandler.jsx";
 
 // Initialize error logging and global error handlers
 initializeErrorLogging();

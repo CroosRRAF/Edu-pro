@@ -1,4 +1,4 @@
-import { Eye, EyeOff, Lock, Mail, User } from "lucide-react";
+import { Building2, Eye, EyeOff, Lock, Mail, User } from "lucide-react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ROUTES } from "../constants/routes";

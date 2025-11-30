@@ -1,6 +1,8 @@
 import React from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ErrorBoundary from "./components/common/ErrorBoundary";
 import PWAInstallPrompt from "./components/pwa/PWAInstallPrompt";
@@ -331,6 +333,7 @@ function App() {
           <ThemeProvider>
             <AuthProvider>
               <NotificationProvider>
+                <ToastContainer />
                 <React.Suspense
                   fallback={
                     <div className="min-h-screen flex items-center justify-center">
@@ -544,6 +547,20 @@ function App() {
                       }
                     />
                     <Route
+                      path={`${ROUTES.ADMIN_ROUTES.STUDENTS}/import`}
+                      element={
+                        <ProtectedRoute
+                          allowedRoles={[
+                            ROLES.ADMIN,
+                            ROLES.PRINCIPAL,
+                            ROLES.SUPER_ADMIN,
+                          ]}
+                        >
+                          <BulkImportStudents />
+                        </ProtectedRoute>
+                      }
+                    />
+                    <Route
                       path={`${ROUTES.ADMIN_ROUTES.STUDENTS}/edit/:id`}
                       element={
                         <ProtectedRoute
@@ -568,20 +585,6 @@ function App() {
                           ]}
                         >
                           <StudentDetail />
-                        </ProtectedRoute>
-                      }
-                    />
-                    <Route
-                      path={`${ROUTES.ADMIN_ROUTES.STUDENTS}/import`}
-                      element={
-                        <ProtectedRoute
-                          allowedRoles={[
-                            ROLES.ADMIN,
-                            ROLES.PRINCIPAL,
-                            ROLES.SUPER_ADMIN,
-                          ]}
-                        >
-                          <BulkImportStudents />
                         </ProtectedRoute>
                       }
                     />
